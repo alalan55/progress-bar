@@ -1,9 +1,12 @@
 <script setup>
 import { ref } from "vue";
 
+const props = defineProps({
+  hasMessage: { type: Boolean, default: false },
+  message: { type: String, default: "" },
+});
+
 const size = ref(0);
-const hasMessage = ref(true);
-const message = ref("HELLO MY FRIEND");
 const mainColor = ref("#4caf50");
 const interval = ref(null);
 
@@ -16,7 +19,7 @@ const x = () => {
   }
 };
 
-const start = () => (interval.value = setInterval(x, 10));
+const start = () => (interval.value = setInterval(x, 30));
 const stop = () => clearInterval(interval.value);
 </script>
 
@@ -28,7 +31,7 @@ const stop = () => clearInterval(interval.value);
         :style="{ width: `${size}%`, backgroundColor: mainColor }"
       ></div>
     </div>
-    <div v-if="hasMessage" class="wrapper__message">
+    <div v-if="props.hasMessage" class="wrapper__message">
       <span :style="{ color: mainColor }">{{ message }}</span>
     </div>
   </div>
